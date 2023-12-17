@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="blockerbody">
+      <div class="maintenance-container animatedi">
+        <img
+          class="blockerimg animatedi"
+          src="princeimg/blocker.png"
+          alt="Maintenance Image"
+        />
+        <h4 class="blocker-heading animatedi">
+          This website has been kept under maintenance by the Developer
+        </h4>
+        <p class="blocker-p">The Web will resume soon</p>
+        <hr />
+        <div class="reload-button" onclick="location.reload();">
+          <img
+            src="princeimg/refresh.png"
+            alt="Reload Icon"
+            class="reload-icon"
+          />
+          <p class="reload-text">Reload Web</p>
+        </div>
+        <hr />
+        <div class="details-container animatedi">
+          <button id="toggle-details" class="button blockerbutton animatedi">
+            Maintenance Details
+          </button>
+          <div id="maintenance-details" class="hidden animatedi">
+            <p class="maintenance-text">
+              closed on <span id="maintenance-start-time">Loading...</span>
+            </p>
+            <p class="maintenance-text">
+              resuming on <span id="maintenance-end-time">Loading...</span>
+            </p>
+            <p class="blockerp animatedi">
+              <a href="https://instagram.com/princemaster_1">Prince Master</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Notification-->
+    <button
+      class="notification-button"
+      id="notification-button"
+      onclick="toggleNotification()"
+    >
+      <img src="princeimg/coding.png" alt="Prince Update" />
+    </button>
+    <div
+      class="notification-container"
+      id="notification-container"
+      style="display: none"
+    >
+      <div class="notification-header animatedi">
+        <img
+          src="princeimg/icon2.jpg"
+          alt="Icon"
+          class="sender-icon animatedi"
+        />
+        <h3 class="sender-name animatedi">
+          princemaster<img
+            src="princeimg/verified.png"
+            alt="Verified"
+            class="verified-badge"
+          />
+        </h3>
+        <button
+          id="close-notification"
+          class="close-button animatedi"
+          onclick="closeNotification()"
+        >
+          ×
+        </button>
+      </div>
+      <div class="notification-content animatedi">
+        <p id="notification-p" class="notification-p animatedi">
+          <span class="important-bc">Developer Broadcast:</span> All is well 👍.
+          At the moment no broadcast is available from the Developer.
+        </p>
+        <!-- Add a password input and a button to reveal the count -->
+        <button id="help-button" class="help-button">
+          <img src="princeimg/help.png" alt="Help Icon" class="help-icon" />
+        </button>
+
+        <div class="control-panel hidden">
+          <h2 class="panel-head">Control Panel</h2>
+          <hr />
+          <form id="web-blocker-form">
+            <label for="start-time">Start Time:</label>
+            <input type="datetime-local" id="start-time-input" />
+            <br />
+            <label for="stop-time">Stop Time:</label>
+            <input type="datetime-local" id="stop-time-input" />
+            <br />
+            <button
+              type="button"
+              id="set-time-button"
+              class="control-panel-button"
+            >
+              Set Time
+            </button>
+            <button
+              type="button"
+              id="show-schedule-button"
+              class="control-panel-button"
+            >
+              Show Schedule
+            </button>
+
+            <hr />
+            <div id="count-box" class="count-box">
+              <p class="count"><span id="count">0</span> Downloads</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn animatedi" id="download-button">
+      <img
+        src="princeimg/download.png"
+        alt="Download Icon"
+        class="download-icon animatedi"
+      />
+      Download
+    </button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+    <script src="script.js"></script>
+  
+  </body>
+</html>
