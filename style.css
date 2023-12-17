@@ -1,0 +1,293 @@
+.help-button {
+  margin-right: 10px;
+  position: absolute;
+  top: -60px;
+  border: none;
+  padding: 13px 15px;
+  right: 0px;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.help-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.control-panel {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 80%;
+  margin: 20px auto;
+}
+
+.control-panel h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+input[type="datetime-local"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.control-panel-button {
+  background-color: #17d9d6;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+
+.control-panel .hidden {
+  display: none;
+}
+
+.reload-button {
+  text-align: center;
+  cursor: pointer;
+}
+
+.reload-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: 0 auto;
+}
+
+.reload-text {
+  font-size: 16px;
+}
+
+.blockerbody {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+
+.blockerimg {
+  height: 150px;
+  width: 170px;
+  margin-bottom: 20px;
+}
+
+.maintenance-container,
+.details-container,
+.blockerh1,
+.blockerbutton {
+  background-color: #fff;
+}
+
+.maintenance-container {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 80%;
+}
+
+.blockerbutton {
+  background-color: #17d6d6;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+#maintenance-start-time,
+#maintenance-end-time {
+  color: navy;
+}
+
+.maintenance-text {
+  color: #17d6d6;
+}
+
+
+.hidden {
+  display: none;
+}
+
+.blockerp {
+  text-decoration: underline;
+  color: #17d6d6;
+}
+
+.notification-container {
+  background-color: ghostwhite;
+  width: 450px;
+  position: fixed;
+  top: 74px;
+  left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.notification-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background: url('princeimg/favicon2.png') no-repeat fixed;
+  opacity: 0.2;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #17d9d6;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.notification-p {
+  color: lightslategray;
+}
+
+.important-bc {
+  color: black;
+}
+
+.sender-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.sender-name {
+  font-size: 18px;
+  margin: 0;
+  background-color: transparent;
+  color: ghostwhite;
+}
+
+.verified-badge {
+  width: 30px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  text-decoration: underline;
+}
+
+.notification-content {
+  padding: 15px;
+  line-height: 1.4;
+}
+
+.reloadb-icon {
+  bottom: 1%;
+  left: 1.5%;
+  background: none;
+  border: none;
+  z-index: 1;
+  outline: none;
+  height: 32px;
+  width: 32px;
+  position: fixed;
+}
+
+.notification-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: ghostwhite;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.notification-button img {
+  height: 30px;
+  width: 30px;
+}
+
+
+#download-button {
+  border: none;
+  color: ghostwhite;
+  padding: 15px 190px;
+  font-size: 16px;
+  background: linear-gradient(to top, royalblue, royalblue, royalblue, royalblue, royalblue, royalblue, #fff);
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.download-icon {
+  height: 25px;
+  width: 25px;
+}
+
+.count {
+  color: #1e90ff;
+}
+
+.count-box {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+  border: none;
+  padding: 5px 83px;
+  text-align: center;
+  margin-top: 8px;
+}

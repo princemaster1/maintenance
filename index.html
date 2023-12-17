@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Page Title</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="blockerbody">
+      <div class="maintenance-container animatedi">
+        <img
+          class="blockerimg animatedi"
+          src="princeimg/blocker.png"
+          alt="Maintenance Image"
+        />
+        <h4 class="blocker-heading animatedi">
+          This website has been kept under maintenance by the Developer
+        </h4>
+        <p class="blocker-p">The Web will resume soon</p>
+        <hr />
+        <div class="reload-button" onclick="location.reload();">
+          <img
+            src="princeimg/refresh.png"
+            alt="Reload Icon"
+            class="reload-icon"
+          />
+          <p class="reload-text">Reload Web</p>
+        </div>
+        <hr />
+        <div class="details-container animatedi">
+          <button id="toggle-details" class="button blockerbutton animatedi">
+            Maintenance Details
+          </button>
+          <div id="maintenance-details" class="hidden animatedi">
+            <p class="maintenance-text">
+              closed on <span id="maintenance-start-time">Loading...</span>
+            </p>
+            <p class="maintenance-text">
+              resuming on <span id="maintenance-end-time">Loading...</span>
+            </p>
+            <p class="blockerp animatedi">
+              <a href="https://instagram.com/princemaster_1">Prince Master</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Notification-->
+    <button
+      class="notification-button"
+      id="notification-button"
+      onclick="toggleNotification()"
+    >
+      <img src="princeimg/coding.png" alt="Prince Update" />
+    </button>
+    <div
+      class="notification-container"
+      id="notification-container"
+      style="display: none"
+    >
+      <div class="notification-header animatedi">
+        <img
+          src="princeimg/icon2.jpg"
+          alt="Icon"
+          class="sender-icon animatedi"
+        />
+        <h3 class="sender-name animatedi">
+          princemaster<img
+            src="princeimg/verified.png"
+            alt="Verified"
+            class="verified-badge"
+          />
+        </h3>
+        <button
+          id="close-notification"
+          class="close-button animatedi"
+          onclick="closeNotification()"
+        >
+          ×
+        </button>
+      </div>
+      <div class="notification-content animatedi">
+        <p id="notification-p" class="notification-p animatedi">
+          <span class="important-bc">Developer Broadcast:</span> All is well 👍.
+          At the moment no broadcast is available from the Developer.
+        </p>
+        <!-- Add a password input and a button to reveal the count -->
+        <button id="help-button" class="help-button">
+          <img src="princeimg/help.png" alt="Help Icon" class="help-icon" />
+        </button>
+
+        <div class="control-panel hidden">
+          <h2 class="panel-head">Control Panel</h2>
+          <hr />
+          <form id="web-blocker-form">
+            <label for="start-time">Start Time:</label>
+            <input type="datetime-local" id="start-time-input" />
+            <br />
+            <label for="stop-time">Stop Time:</label>
+            <input type="datetime-local" id="stop-time-input" />
+            <br />
+            <button
+              type="button"
+              id="set-time-button"
+              class="control-panel-button"
+            >
+              Set Time
+            </button>
+            <button
+              type="button"
+              id="show-schedule-button"
+              class="control-panel-button"
+            >
+              Show Schedule
+            </button>
+
+            <hr />
+            <div id="count-box" class="count-box">
+              <p class="count"><span id="count">0</span> Downloads</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn animatedi" id="download-button">
+      <img
+        src="princeimg/download.png"
+        alt="Download Icon"
+        class="download-icon animatedi"
+      />
+      Download
+    </button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+
+    <script src="script.js"></script>
+    <script>
+       var notificationVisible = true;
+       var socket = io();
+
+       socket.on('maintenanceStatus', function (status) {
+         if (status.active) {
+           setWebBlockerStatus(status.startTime, status.stopTime);
+         }
+       });
+
+       function toggleNotification() {
+         var notificationContainer = document.getElementById("notification-container");
+         notificationVisible = !notificationVisible;
+
+         if (notificationVisible) {
+           notificationContainer.style.display = "block";
+         } else {
+           notificationContainer.style.display = "none";
+         }
+       }
+
+       function closeNotification() {
+         var notificationContainer = document.getElementById("notification-container");
+         notificationContainer.style.display = "none";
+         notificationVisible = true;
+       }
+
+       var blockStartTime = null;
+       var blockStopTime = null;
+
+       var webBlocker = document.querySelector('.blockerbody');
+       var isWebBlocked = true;
+       var showDetails = false;
+
+       var savedStartTime = localStorage.getItem('blockStartTime');
+       var savedStopTime = localStorage.getItem('blockStopTime');
+       if (savedStartTime && savedStopTime) {
+         document.getElementById('start-time-input').value = savedStartTime;
+         document.getElementById('stop-time-input').value = savedStopTime;
+         setWebBlockerStatus(new Date(savedStartTime).getTime(), new Date(savedStopTime).getTime());
+       }
+
+       function toggleWebBlocker() {
+         if (isWebBlocked) {
+           webBlocker.style.display = 'flex';
+           document.body.style.overflow = 'hidden';
+         } else {
+           webBlocker.style.display = 'none';
+           document.body.style.overflow = 'auto';
+         }
+       }
+
+       function setWebBlockerStatus(start, stop) {
+         blockStartTime = start;
+         blockStopTime = stop;
+         var currentTime = new Date().getTime();
+
+         if (currentTime >= blockStartTime && currentTime <= blockStopTime) {
+           isWebBlocked = true;
+         } else {
+           isWebBlocked = false;
+         }
+         toggleWebBlocker();
+       }
+
+       function toggleMaintenanceDetails() {
+         showDetails = !showDetails;
+         var maintenanceDetails = document.getElementById('maintenance-details');
+         var toggleButton = document.getElementById('toggle-details');
+         var maintenanceStartTime = document.getElementById('maintenance-start-time');
+         var maintenanceStopTime = document.getElementById('maintenance-end-time');
+
+         if (showDetails) {
+           maintenanceDetails.classList.remove('hidden');
+           toggleButton.textContent = 'Hide Maintenance Details';
+           if (blockStartTime !== null) {
+             var blockStartString = new Date(blockStartTime).toLocaleString();
+             maintenanceStartTime.innerText = '' + blockStartString;
+           }
+
+           if (blockStopTime !== null) {
+             var blockStopString = new Date(blockStopTime).toLocaleString();
+             maintenanceStopTime.innerText = '' + blockStopString;
+           }
+         } else {
+           maintenanceDetails.classList.add('hidden');
+           toggleButton.textContent = 'Maintenance Details';
+         }
+       }
+
+       document.getElementById('set-time-button').addEventListener('click', function () {
+         var startDateTime = new Date(document.getElementById('start-time-input').value).getTime();
+         var stopDateTime = new Date(document.getElementById('stop-time-input').value).getTime();
+         setWebBlockerStatus(startDateTime, stopDateTime);
+
+         localStorage.setItem('blockStartTime', document.getElementById('start-time-input').value);
+         localStorage.setItem('blockStopTime', document.getElementById('stop-time-input').value);
+
+         // Emit update to the server
+         socket.emit('updateMaintenanceStatus', {
+           active: isWebBlocked,
+           startTime: blockStartTime,
+           stopTime: blockStopTime,
+         });
+       });
+
+       document.getElementById('show-schedule-button').addEventListener('click', function () {
+         if (blockStartTime !== null && blockStopTime !== null) {
+           var blockStartString = new Date(blockStartTime).toLocaleString();
+           var blockStopString = new Date(blockStopTime).toLocaleString();
+           alert('The web blocker is scheduled from ' + blockStartString + ' to ' + blockStopString);
+         } else if ((blockStartTime && blockStopTime) === null) {
+           alert('No active schedule');
+         } else {
+           alert('No schedule is set');
+         }
+       });
+
+       document.getElementById('toggle-details').addEventListener('click', toggleMaintenanceDetails);
+
+       var pin = "TVRrMk1qRTVNVEk9Cg==";
+       var isPanelVisible = false;
+
+       document.getElementById('help-button').addEventListener('click', function () {
+         var enteredPin = prompt("Enter PIN to access the developer's control panel:");
+         if (enteredPin === prince(pin)) {
+           toggleControlPanel();
+           document.getElementById('help-button').style.display = 'none';
+           document.getElementById('notification-p').style.display = 'none';
+         } else if (enteredPin === "") {
+           alert("Please enter the required PIN to access the control panel.");
+         } else if (enteredPin === null) {
+           alert("Bye👋!");
+         } else {
+           alert("Invalid PIN. Access denied.");
+         }
+       });
+
+       function toggleControlPanel() {
+         var controlPanel = document.querySelector('.control-panel');
+         isPanelVisible = !isPanelVisible;
+         if (isPanelVisible) {
+           controlPanel.classList.remove('hidden');
+         } else {
+           controlPanel.classList.add('hidden');
+         }
+       }
+
+       function prince(princeMaster) {
+         var initial = atob(princeMaster);
+         var original = atob(initial);
+         return original;
+       }
+
+    </script>
+  </body>
+</html>
